@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{395CFE23-382F-46E9-B311-172FC54F065C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataManagement</RootNamespace>
+    <AssemblyName>DataManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Managers\DataManager.cs" />
+    <Compile Include="Datatype\Test\Answer.cs" />
+    <Compile Include="Datatype\Test\AnswerType.cs" />
+    <Compile Include="Datatype\Test\IDValue.cs" />
+    <Compile Include="Datatype\Test\IDValueType.cs" />
+    <Compile Include="Datatype\Test\Level.cs" />
+    <Compile Include="Managers\Manager.cs" />
+    <Compile Include="Managers\ManagerFactory.cs" />
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserGroup.cs" />
+    <None Include="Managers\DbManager.cs" />
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Datatype\Test\Question.cs" />
+    <Compile Include="Datatype\Test\QuestionType.cs" />
+    <Compile Include="Datatype\Test\Quiz.cs" />
+    <Compile Include="Datatype\Test\QuizType.cs" />
+    <Compile Include="Datatype\Test\SimpleQuestion.cs" />
+    <Compile Include="Datatype\Test\Test.cs" />
+    <Compile Include="Datatype\Test\Tip.cs" />
+    <Compile Include="Datatype\Test\TipType.cs" />
+    <Compile Include="Datatype\Test\Topic.cs" />
+    <Compile Include="Managers\TestManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeveliaGameEngine\DeveliaGameEngine.csproj">
+      <Project>{B6F12935-3D8D-4FBF-B5D8-C6C7CACD61FC}</Project>
+      <Name>DeveliaGameEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
