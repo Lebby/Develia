@@ -11,105 +11,213 @@ namespace Develia.GUI.Util
 
     public interface IQuizFactory
     {
-        QuestionBlock CreateQuestionBlock(QuestionType type);
-        QuestionWidget CreateQuestionWidget(Question question);
-        AnswerBlock CreateAnswerBlock(QuizType type);
-        AnswerWidget CreateAnswerWidget(Answer answer);
-        TipBlock CreateTipBlock(TipType type);
-        TipWidget CreateTipWidget(Tip tip);
-        QuizBlock CreateQuizBlock(Quiz quiz);
+        QuizBlock       CreateQuizBlock     (Quiz quiz);
+        QuestionBlock   CreateQuestionBlock (Quiz quiz);
+        AnswerBlock     CreateAnswerBlock   (Quiz quiz);
+        TipBlock        CreateTipBlock      (Quiz quiz);
 
-        void Register(QuizType type, IQuizBlockFactory factory);
-        void Register(QuizType type, IQuestionBlockFactory factory);
-        void Register(QuizType type, IAnswerBlockFactory factory);
-        void Register(QuizType type, ITipBlockFactory factory);
-        
-        void Register(QuestionType type, IQuestionWidgetFactory factory);
-        void Register(AnswerType type, IAnswerWidgetFactory factory);
-        void Register(TipType type, ITipWidgetFactory factory);
+        QuestionWidget  CreateQuestionWidget(Question question);        
+        AnswerWidget    CreateAnswerWidget  (Answer answer);        
+        TipWidget       CreateTipWidget     (Tip tip);        
         
     }
     
-    public abstract class AbstractQuizFactory : IQuizFactory
+    //facade + strategy + factory + singlethon
+    public class QuizFactory : IQuizFactory
     {
-        private Dictionary<QuizType, IQuizBlockFactory> _QuizBlockStrategy = new Dictionary<QuizType, IQuizBlockFactory>();
-        private Dictionary<QuizType, IQuestionBlockFactory> _QuestionBlockStrategy = new Dictionary<QuizType, IQuestionBlockFactory>();
-        private Dictionary<QuizType, IAnswerBlockFactory> _AnswerBlockStrategy = new Dictionary<QuizType, IAnswerBlockFactory>();
-        private Dictionary<QuizType, ITipBlockFactory> _TipBlockStrategy = new Dictionary<QuizType, ITipBlockFactory>();
+        //blocks
+        private Dictionary<QuizType, IQuizBlockFactory>     _QuizBlockStrategy;
+        private Dictionary<QuizType, IQuestionBlockFactory> _QuestionBlockStrategy;
+        private Dictionary<QuizType, IAnswerBlockFactory>   _AnswerBlockStrategy;
+        private Dictionary<QuizType, ITipBlockFactory>      _TipBlockStrategy;
+        
+        
+        //widgets
+        private Dictionary<QuestionType, IQuestionWidgetFactory> _QuestionWidgetStrategy;
+        private Dictionary<AnswerType,   IAnswerWidgetFactory>   _AnswerWidgetStrategy;
+        private Dictionary<TipType,      ITipWidgetFactory>      _TipWidgetStrategy;
 
         
-        private Dictionary<QuestionType, IQuestionWidgetFactory> _QuestionWidgetStrategy = new Dictionary<QuestionType, IQuestionWidgetFactory>();
-        private Dictionary<AnswerType, IAnswerWidgetFactory> _AnswerWidgetStrategy = new Dictionary<AnswerType, IAnswerWidgetFactory>();
-        private Dictionary<TipType, ITipWidgetFactory> _TipWidgetStrategy = new Dictionary<TipType, ITipWidgetFactory>();
+        //getters
+        public Dictionary<QuizType, IQuizBlockFactory>          QuizBlockStrategy       { get; }
+        public Dictionary<QuizType, IQuestionBlockFactory>      QuestionBlockStrategy   { get; }
+        public Dictionary<QuizType, IAnswerBlockFactory>        AnswerBlockStrategy     { get; }
+        public Dictionary<QuizType, ITipBlockFactory>           TipBlockStrategy        { get; }
         
+        public Dictionary<QuestionType, IQuestionWidgetFactory> QuestionWidgetStrategy  { get; }
+        public Dictionary<AnswerType,   IAnswerWidgetFactory>   AnswerWidgetStrategy    { get; }
+        public Dictionary<TipType,      ITipWidgetFactory>      TipWidgetStrategy       { get; }
         
-        public QuizBlock CreateQuizBlock(Quiz quiz)
+
+        //singlethon
+        private static QuizFactory _Instance = null;
+        
+        public  static QuizFactory Instance
         {
-            QuizBlock quizBlock = new QuizBlock();
-            
-            quizBlock.QuestionBlock = CreateQuestionBlock(quiz.QuestionType);
-            quizBlock.AnswerBlock   = CreateAnswerBlock(quiz.QuizType);            
-            quizBlock.TipBlock      = CreateTipBlock(quiz.TipType);
+            get
+            {
+                if (_Instance == null)
+                    _Instance = new QuizFactory();
+                return _Instance;
+            }
+        }
+        
+        
+        private QuizFactory()
+        {
+            _QuizBlockStrategy      = new Dictionary<QuizType, IQuizBlockFactory>();
+            _QuestionBlockStrategy  = new Dictionary<QuizType, IQuestionBlockFactory>();
+            _AnswerBlockStrategy    = new Dictionary<QuizType, IAnswerBlockFactory>();
+            _TipBlockStrategy       = new Dictionary<QuizType, ITipBlockFactory>();
+        
+        
+            _QuestionWidgetStrategy = new Dictionary<QuestionType,  IQuestionWidgetFactory>();
+            _AnswerWidgetStrategy   = new Dictionary<AnswerType,    IAnswerWidgetFactory>();
+            _TipWidgetStrategy      = new Dictionary<TipType,       ITipWidgetFactory>();
+        }
 
 
-            foreach(long tmp in quiz.Answers )
+
+        //facade + strategy
+
+        public QuizBlock        CreateQuizBlock(Quiz quiz)
+        {
+             return QuizBlockStrategy[quiz.QuizType]
+                    .Create(quiz);
+        }
+
+        public QuestionBlock    CreateQuestionBlock(Quiz quiz)
+        {
+            return  QuestionBlockStrategy[quiz.QuizType]
+                    .Create(quiz);
+        }
+
+        public AnswerBlock      CreateAnswerBlock(Quiz quiz)
+        {
+            return  AnswerBlockStrategy[quiz.QuizType]
+                    .Create(quiz);
+        }
+
+        public TipBlock         CreateTipBlock(Quiz quiz)
+        {
+            return  TipBlockStrategy[quiz.QuizType]
+                    .Create(quiz);
+        }
+
+        public QuestionWidget   CreateQuestionWidget(Question question)
+        { 
+            return  QuestionWidgetStrategy[question.Type]
+                    .Create(question);
+        }
+
+        public AnswerWidget     CreateAnswerWidget(Answer answer) 
+        { 
+            return  AnswerWidgetStrategy[answer.Type]
+                    .Create(answer); 
+        }
+
+        public TipWidget        CreateTipWidget(Tip tip) 
+        { 
+            return  TipWidgetStrategy[tip.Type]
+                    .Create(tip); 
+        }
+        
+    }
+
+
+    //factories interface
+    public interface    IQuizBlockFactory
+    {
+        QuizBlock       Create(Quiz quiz);
+    }
+
+    public interface    IQuestionBlockFactory
+    {
+        QuestionBlock   Create(Quiz quiz);        
+    }   
+
+    public interface    IAnswerBlockFactory
+    {
+        AnswerBlock     Create(Quiz quiz);        
+    }
+
+    public interface    ITipBlockFactory
+    {
+        TipBlock        Create(Quiz quiz);        
+    }
+
+    public interface    IQuestionWidgetFactory
+    {
+        QuestionWidget  Create(Question question);        
+    }
+
+    public interface    IAnswerWidgetFactory
+    {
+        AnswerWidget    Create(Answer answer);        
+    }
+
+    public interface    ITipWidgetFactory
+    {
+        TipWidget       Create(Tip tip);        
+    }  
+
+
+
+
+    //default factories impl
+    public class DefaultQuizBlockFactory : IQuizBlockFactory
+    {
+        QuizBlock Create(Quiz quiz)
+        {
+            QuizBlock quizBlock     = new QuizBlock();
+
+            quizBlock.QuestionBlock = QuizFactory.Instance.CreateQuestionBlock(quiz);
+            quizBlock.AnswerBlock   = QuizFactory.Instance.CreateAnswerBlock(quiz);
+            quizBlock.TipBlock      = QuizFactory.Instance.CreateTipBlock(quiz);
+
+
+            foreach (long tmp in quiz.Answers)
             {
                 Answer tmpAnswer = DataManager.Instance.GetAnswer(tmp);
-                quizBlock.AnswerBlock.AnswerListWidget.Add(CreateAnswerWidget(tmpAnswer));
+                quizBlock
+                    .AnswerBlock
+                    .AnswerListWidget
+                    .Add(QuizFactory.Instance.CreateAnswerWidget(tmpAnswer));
             }
 
-
-            return default(QuizBlock);
+            return quizBlock;
+            //return default(QuizBlock);
         }
     }
 
-    public interface IQuizBlockFactory
+    public class DefaultQuestionBlockFactory    : IQuestionBlockFactory
     {
-        QuizBlock Create();
+        QuestionBlock   Create(Quiz quiz);        
     }
 
-    public interface IQuestionBlockFactory
+    public class DefaultAnswerBlockFactory      : IAnswerBlockFactory
     {
-        QuestionBlock Create();
+        AnswerBlock     Create(Quiz quiz);        
     }
 
-    public interface IQuestionWidgetFactory
+    public class DefaultTipBlockFactory         : ITipBlockFactory
     {
-        QuestionWidget Create();
+        TipBlock        Create(Quiz quiz);
     }
 
-    public interface IAnswerBlockFactory
+    public class DefaultQuestionWidgetFactory   : IQuestionWidgetFactory
     {
-        AnswerBlock Create();
+        QuestionWidget  Create(Question question);
     }
 
-    public interface IAnswerWidgetFactory
+    public class DefaultAnswerWidgetFactory     : IAnswerWidgetFactory
     {
-        AnswerWidget Create();
+        AnswerWidget    Create(Answer answer);
     }
 
-    public interface ITipBlockFactory
+    public class DefaultTipWidgetFactory : ITipWidgetFactory
     {
-        TipBlock Create();
+        TipWidget       Create(Tip tip);
     }
-
-    public interface ITipWidgetFactory
-    {
-        TipWidget Create();
-    }
-
-    
-    /*public interface IQuizStrategy
-    {
-        QuestionBlock CreateQuestionBlock(Question question);
-        AnswerBlock CreateAnswerBlock(List<Answer> anwser);
-        QuizBlock CreateQuizBlock(Quiz quiz);
-        
-        AnswerWidget CreateAnswerWidget(Answer answer);
-        QuestionWidget CreateQuestionWidget(Question question);
-        
-    }*/
-
-
 
 }
