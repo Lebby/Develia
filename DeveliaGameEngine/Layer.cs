@@ -40,7 +40,7 @@ namespace DeveliaGameEngine
             {
                 try
                 {
-                    //Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
+                    Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
                     Game.Components.Add(tmp);
                     if (tmp is Layer) ((Layer)(tmp)).ForceLoad();
                 }
@@ -96,9 +96,7 @@ namespace DeveliaGameEngine
         }
 
         public void Arrange()
-        {            
-            Console.WriteLine(" PRE Layout ");
-            Bound = CalculateBound();
+        {                        
             Console.WriteLine(this + " PRE Layout - W : " + Bound.Width + " - H : " +  Bound.Height );
             if (_layout != null) _layout.Arrange(_components,Bound);
             Console.WriteLine("Layout " + _layout + " : " + this);

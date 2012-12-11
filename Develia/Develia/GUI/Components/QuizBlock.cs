@@ -68,6 +68,7 @@ namespace Develia.GUI.Components
 
         public QuizBlock()
         {
+            //this not change order
             QuestionBlock   = new QuestionBlock();
             AnswerBlock     = new AnswerBlock();
             TipBlock        = new TipBlock();
@@ -76,9 +77,12 @@ namespace Develia.GUI.Components
         public override void OnLoad()
         {
             base.OnLoad();
-            addComponent(QuestionBlock);
-            addComponent(AnswerBlock);
+            //this not change order
             addComponent(TipBlock);
+            addComponent(AnswerBlock);
+            addComponent(QuestionBlock);
+            
+            
         }
     }
 }
