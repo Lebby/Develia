@@ -17,7 +17,7 @@ namespace Develia.GUI.Components
             {
                 if (_questionWidget != default(QuestionWidget)) removeComponent(_questionWidget);
                 _questionWidget = value;
-                addComponent(_questionWidget);
+                addComponent(_questionWidget);                
             } 
         }
 

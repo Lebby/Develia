@@ -68,9 +68,9 @@ namespace Develia.GUI.Components
 
         public QuizBlock()
         {
-            QuestionBlock = new QuestionBlock();
-            AnswerBlock = new AnswerBlock();
-            TipBlock = new TipBlock();
+            QuestionBlock   = new QuestionBlock();
+            AnswerBlock     = new AnswerBlock();
+            TipBlock        = new TipBlock();
         }
 
         public override void OnLoad()

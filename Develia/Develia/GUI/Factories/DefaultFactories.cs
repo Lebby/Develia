@@ -30,8 +30,7 @@ namespace Develia.GUI.Factories
                     .Add(QuizFactory.Instance.CreateAnswerWidget(tmpAnswer));
             }
 
-            return quizBlock;
-            //return default(QuizBlock);
+            return quizBlock;            
         }
     }
 

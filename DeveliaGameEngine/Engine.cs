@@ -89,7 +89,7 @@ namespace DeveliaGameEngine
 
         
 
-        //public static Game Game { get { return instance.Game; }  }
+        
         public static Engine Instance { get { return instance; } }
 
 
@@ -112,18 +112,17 @@ namespace DeveliaGameEngine
                 instance = new Engine(game);                
             }            
         }
-
-
+        
         public void loadScreen(Screen screen)
         {            
-            System.Diagnostics.Debug.WriteLine("CurrentScreen On Load " + screen.ID); //stampa di prova
-            System.Diagnostics.Debug.WriteLine("Components " + Game.Components.Count); //stampa di prova
+            //System.Diagnostics.Debug.WriteLine("CurrentScreen On Load " + screen.ID); //stampa di prova
+            //System.Diagnostics.Debug.WriteLine("Components " + Game.Components.Count); //stampa di prova
             if (_currentScreen != null)
             {
                 _currentScreen.OnUnload();                
                 Unload(_currentScreen);
                 Hide(_currentScreen);
-                System.Diagnostics.Debug.WriteLine("CurrentScreen On UnLoad " + _currentScreen.ID); //stampa di prova                
+                //System.Diagnostics.Debug.WriteLine("CurrentScreen On UnLoad " + _currentScreen.ID); //stampa di prova                
             }            
             _currentScreen = screen;
             Load(screen);
@@ -135,13 +134,7 @@ namespace DeveliaGameEngine
             layer.OnLoad();
             Game.Components.Add(layer);
             layer.ForceLoad();
-                
-            
-            /*
-            foreach (Object2D tmp in layer.ObjectList)
-            {
-                Game.Components.Add(tmp);
-            }*/
+            layer.Arrange();
             layer.Enabled = true;
         }        
 
@@ -151,7 +144,6 @@ namespace DeveliaGameEngine
             layer.Visible = true;
             foreach (Object2D tmp in layer.ObjectList)
             {
-                //Game.Components.Add(tmp);                
                 tmp.Visible = true;
                 tmp.OnShow();
             }            
@@ -163,7 +155,6 @@ namespace DeveliaGameEngine
             {
                 tmp.OnHide();
                 tmp.Visible = false;                
-                //Game.Components.Remove(tmp);
             }
             layer.OnHide();
             layer.Visible = false;
@@ -174,13 +165,6 @@ namespace DeveliaGameEngine
             layer.OnUnload();
             Game.Components.Remove(layer);
             layer.ForceUnload();
-
-            
-            /*
-            foreach (Object2D tmp in layer.ObjectList)
-            {
-                Game.Components.Remove(tmp);
-            }*/
             layer.Enabled = false;
         }
 

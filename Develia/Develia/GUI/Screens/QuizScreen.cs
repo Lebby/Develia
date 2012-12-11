@@ -21,6 +21,7 @@ namespace Develia.GUI.Screens
             {
                 if (_quizBlock != default(QuizBlock)) removeComponent(_quizBlock);
                 _quizBlock = value;
+                addComponent(QuizBlock);
             }
         }
        
@@ -28,12 +29,6 @@ namespace Develia.GUI.Screens
         {            
             QuizBlock = new QuizBlock();                        
         }
-
-        public override void OnLoad()
-        {
-            base.OnLoad();
-            Console.WriteLine("ONLOAD QUIZSCREEN");
-            addComponent(QuizBlock);
-        }
+        
     }
 }

@@ -102,6 +102,7 @@ namespace DeveliaGameEngine
 
         public virtual Rectangle CalculateBound()
         {
+            if (_texture == null) return default(Rectangle);
             return new Rectangle((int)Position.X, (int)Position.Y, _texture.Bounds.Width, _texture.Bounds.Height);
         }
 
