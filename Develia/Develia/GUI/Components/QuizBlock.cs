@@ -11,10 +11,10 @@ namespace Develia.GUI.Components
 {
     public class QuizBlock : Layer
     {
-        private AnswerBlock _answerBlock;
-        private QuestionBlock _questionBlock;
-        private TipBlock _tipBlock;
-        private Quiz _quiz;
+        private AnswerBlock     _answerBlock;
+        private QuestionBlock   _questionBlock;
+        private TipBlock        _tipBlock;
+        private Quiz            _quiz;
 
         public AnswerBlock AnswerBlock {
             get { return _answerBlock; } 

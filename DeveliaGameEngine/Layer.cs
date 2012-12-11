@@ -30,16 +30,23 @@ namespace DeveliaGameEngine
         {
             if (isLoad) return;
             isLoad = true;
-            base.LoadContent();            
+            base.LoadContent();
+            Console.WriteLine("\nLayer " + this + " :LoadContent - Current Components : ");
+            foreach (GameComponent tmp in Game.Components)
+            {
+                Console.Write(tmp + " ");
+            }
             foreach (Object2D tmp in ObjectList)
             {
                 try
                 {
+                    Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
                     Game.Components.Add(tmp);
+                    if (tmp is Layer) ((Layer)(tmp)).ForceLoad();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e + "\n Duplicate Component : " + tmp);
+                    Console.WriteLine( e +"\n" +this +" : Duplicate Component : " + tmp);
                 }
             }
             Arrange();
@@ -48,13 +55,15 @@ namespace DeveliaGameEngine
         protected override void UnloadContent()
         {
             if (!isLoad) return;
-            isLoad = false;
+            
             base.UnloadContent();
             foreach (Object2D tmp in ObjectList)
             {
                 Game.Components.Remove(tmp);
+                if (tmp is Layer) ((Layer)(tmp)).ForceUnload();
             }
-            Console.WriteLine("Called unload xxxxxxxxxx");
+            Console.WriteLine("Called unload xxxxxxxxxx : tmp :" + this );
+            isLoad = false;
         }
 
         public void addComponent(Object2D component)
@@ -82,8 +91,7 @@ namespace DeveliaGameEngine
             LoadContent();
         }
         public void ForceUnload()
-        {
-            
+        {            
             UnloadContent();
         }
 

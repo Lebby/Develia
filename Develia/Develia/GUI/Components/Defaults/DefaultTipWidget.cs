@@ -7,5 +7,6 @@ namespace Develia.GUI.Components.Defaults
 {
     class DefaultTipWidget : TipWidget
     {
+        
     }
 }

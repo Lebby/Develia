@@ -28,7 +28,7 @@ namespace Develia.GUI.Factories
 
         //getters
         public Dictionary<QuizType,     IQuizBlockFactory>      QuizBlockStrategy       { get { return _QuizBlockStrategy;} }
-        public Dictionary<QuizType, IQuestionBlockFactory> QuestionBlockStrategy        { get { return _QuestionBlockStrategy; } }
+        public Dictionary<QuizType,     IQuestionBlockFactory>  QuestionBlockStrategy   { get { return _QuestionBlockStrategy; } }
         public Dictionary<QuizType,     IAnswerBlockFactory>    AnswerBlockStrategy     { get { return _AnswerBlockStrategy;} }
         public Dictionary<QuizType,     ITipBlockFactory>       TipBlockStrategy        { get { return _TipBlockStrategy;} }
 
