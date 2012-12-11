@@ -20,7 +20,7 @@ namespace Develia.GUI.Factories
         AnswerWidget    CreateAnswerWidget  (Answer answer);        
         TipWidget       CreateTipWidget     (Tip tip);
 
-        void            init();        
+        void            Init();        
         
     }
     

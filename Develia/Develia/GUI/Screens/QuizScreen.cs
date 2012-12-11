@@ -29,5 +29,11 @@ namespace Develia.GUI.Screens
         {            
             QuizBlock = new QuizBlock();                        
         }
+
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            addComponent(QuizBlock);
+        }
     }
 }

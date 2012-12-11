@@ -12,7 +12,7 @@ namespace Develia.GUI.Factories
     //default factories impl
     public class DefaultQuizBlockFactory : IQuizBlockFactory
     {
-        QuizBlock Create(Quiz quiz)
+        public QuizBlock Create(Quiz quiz)
         {
             QuizBlock quizBlock = new QuizBlock();
 
@@ -37,7 +37,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultQuestionBlockFactory    : IQuestionBlockFactory
     {
-        QuestionBlock Create(Quiz quiz)
+        public QuestionBlock Create(Quiz quiz)
         {
             DefaultQuestionBlock tmp;
             tmp = new DefaultQuestionBlock();
@@ -47,7 +47,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultAnswerBlockFactory      : IAnswerBlockFactory
     {
-        AnswerBlock Create(Quiz quiz)
+        public AnswerBlock Create(Quiz quiz)
         {
             DefaultAnswerBlock tmp;
             tmp = new DefaultAnswerBlock();
@@ -57,7 +57,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultTipBlockFactory         : ITipBlockFactory
     {
-        TipBlock Create(Quiz quiz)
+        public TipBlock Create(Quiz quiz)
         {
             TipBlock tmp;
             tmp = new DefaultTipBlock();
@@ -67,7 +67,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultQuestionWidgetFactory   : IQuestionWidgetFactory
     {
-        QuestionWidget Create(Question question)
+        public QuestionWidget Create(Question question)
         {
             QuestionWidget tmp;
             tmp = new DefaultQuestionWidget();
@@ -77,7 +77,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultAnswerWidgetFactory     : IAnswerWidgetFactory
     {
-        AnswerWidget Create(Answer answer)
+        public AnswerWidget Create(Answer answer)
         {
             AnswerWidget tmp;
             tmp = new DefaultAsnwerWidget();
@@ -87,7 +87,7 @@ namespace Develia.GUI.Factories
 
     public class DefaultTipWidgetFactory        : ITipWidgetFactory
     {
-        TipWidget Create(Tip tip)
+        public TipWidget Create(Tip tip)
         {
             TipWidget tmp;
             tmp = new DefaultTipWidget();

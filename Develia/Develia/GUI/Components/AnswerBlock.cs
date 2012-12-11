@@ -12,10 +12,14 @@ namespace Develia.GUI.Components
 {
     public class AnswerBlock : Layer
     {
-        private List<Answer> _answerList;
-        private List<AnswerWidget> _answerListWidget;
+        private List<Answer>        _answerList;
+        private List<AnswerWidget>  _answerListWidget;
 
-        public List<AnswerWidget> AnswerListWidget {
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary> 
+        public List<AnswerWidget> AnswerListWidget 
+        {
             get
             {
                 return _answerListWidget;
@@ -36,12 +40,18 @@ namespace Develia.GUI.Components
                 }
             }
         }
-        
-        public List<Answer> AnswerList {
-            /*get
+
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public List<Answer> AnswerList 
+        {
+ 
+            get
             {
                 return _answerList;
-            }*/
+            }
+            
             set
             {
                 _answerList = value;
@@ -53,55 +63,18 @@ namespace Develia.GUI.Components
                     tmpa.Answer = tmpAnswer;
                     tmp.Add(tmpa);
                 }
-                _answerListWidget = tmp;
+                AnswerListWidget = tmp;
             }
+
         }
-        public AbstractEffect OnLoadEffect;
 
-        MouseState mouseState;
-        ButtonState buttonState;
-
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
         public AnswerBlock(): base()
-        {
-            OnLoadEffect = new EffectShow(this);
-
+        {           
             _answerListWidget = new List<AnswerWidget>();
             _answerList = new List<Answer>();
-        }
-
-        public override void Update(GameTime gameTime)
-        {            
-            mouseState = Mouse.GetState();
-            buttonState = mouseState.LeftButton;
-
-            base.Update(gameTime);
-            if (Contains(mouseState.X, mouseState.Y))
-            {
-                foreach (AnswerWidget tmp in AnswerListWidget)
-                {
-                    if (tmp.Contains(mouseState.X, mouseState.Y))
-                    {
-                        this.Scale = new Vector2(2, 1);
-                        this.TintColor = Color.Red;
-                        if ((buttonState == ButtonState.Pressed))
-                        {
-                            //Engine.Instance.ResolutionManager.ScreenSize = new Vector2(Width, Height);
-                        }
-                        else
-                        {
-                            this.Scale = new Vector2(1, 1);
-                            this.TintColor = Color.Yellow;
-                        }
-                    }
-                }
-            }
-        }
-
-        public override void OnLoad()
-        {
-            base.OnLoad();
-            OnLoadEffect.Thread.Start();
-        }
-        
+        }        
     }
 }

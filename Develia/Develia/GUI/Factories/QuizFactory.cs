@@ -7,6 +7,9 @@ using DataManagement.Datatype.Test;
 
 namespace Develia.GUI.Factories
 {
+    /// <summary>
+    ///  This class performs an important function.
+    /// </summary>
     //facade + strategy + factory + singlethon
     public class QuizFactory : IQuizFactory
     {
@@ -24,19 +27,22 @@ namespace Develia.GUI.Factories
 
 
         //getters
-        public Dictionary<QuizType,     IQuizBlockFactory>      QuizBlockStrategy       { get; }
-        public Dictionary<QuizType,     IQuestionBlockFactory>  QuestionBlockStrategy   { get; }
-        public Dictionary<QuizType,     IAnswerBlockFactory>    AnswerBlockStrategy     { get; }
-        public Dictionary<QuizType,     ITipBlockFactory>       TipBlockStrategy        { get; }
+        public Dictionary<QuizType,     IQuizBlockFactory>      QuizBlockStrategy       { get { return _QuizBlockStrategy;} }
+        public Dictionary<QuizType, IQuestionBlockFactory> QuestionBlockStrategy        { get { return _QuestionBlockStrategy; } }
+        public Dictionary<QuizType,     IAnswerBlockFactory>    AnswerBlockStrategy     { get { return _AnswerBlockStrategy;} }
+        public Dictionary<QuizType,     ITipBlockFactory>       TipBlockStrategy        { get { return _TipBlockStrategy;} }
 
-        public Dictionary<QuestionType, IQuestionWidgetFactory> QuestionWidgetStrategy  { get; }
-        public Dictionary<AnswerType,   IAnswerWidgetFactory>   AnswerWidgetStrategy    { get; }
-        public Dictionary<TipType,      ITipWidgetFactory>      TipWidgetStrategy       { get; }
+        public Dictionary<QuestionType, IQuestionWidgetFactory> QuestionWidgetStrategy  { get { return _QuestionWidgetStrategy;} }
+        public Dictionary<AnswerType,   IAnswerWidgetFactory>   AnswerWidgetStrategy    { get { return _AnswerWidgetStrategy;} }
+        public Dictionary<TipType,      ITipWidgetFactory>      TipWidgetStrategy       { get { return _TipWidgetStrategy;} }
 
 
         //singlethon
         private static QuizFactory _Instance = null;
 
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
         public static QuizFactory Instance
         {
             get
@@ -47,7 +53,9 @@ namespace Develia.GUI.Factories
             }
         }
 
-
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
         private QuizFactory()
         {
             _QuizBlockStrategy      = new Dictionary<QuizType, IQuizBlockFactory>();
@@ -62,6 +70,9 @@ namespace Develia.GUI.Factories
             Init();
         }
 
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
         public void Init()
         {
             _QuizBlockStrategy      [QuizType.NONE] = new DefaultQuizBlockFactory();
@@ -78,47 +89,69 @@ namespace Develia.GUI.Factories
 
 
         //facade + strategy
-
-        public QuizBlock CreateQuizBlock(Quiz quiz)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public QuizBlock        CreateQuizBlock(Quiz quiz)
         {
-            return QuizBlockStrategy[quiz.QuizType]
-                   .Create(quiz);
+            QuizBlock block = QuizBlockStrategy.ContainsKey(quiz.QuizType) ? QuizBlockStrategy[quiz.QuizType] 
+                .Create(quiz) : ((new DefaultQuizBlockFactory()).Create(quiz));
+            block.Quiz = quiz;
+            return block;
         }
 
-        public QuestionBlock CreateQuestionBlock(Quiz quiz)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public QuestionBlock    CreateQuestionBlock(Quiz quiz)
         {
-            return QuestionBlockStrategy[quiz.QuizType]
-                    .Create(quiz);
+            return QuestionBlockStrategy.ContainsKey(quiz.QuizType)? QuestionBlockStrategy[quiz.QuizType]
+                .Create(quiz) : new DefaultQuestionBlockFactory().Create(quiz);
         }
 
-        public AnswerBlock CreateAnswerBlock(Quiz quiz)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public AnswerBlock      CreateAnswerBlock(Quiz quiz)
         {
-            return AnswerBlockStrategy[quiz.QuizType]
-                    .Create(quiz);
+            return AnswerBlockStrategy.ContainsKey(quiz.QuizType)? AnswerBlockStrategy[quiz.QuizType]
+                .Create(quiz) : new DefaultAnswerBlockFactory().Create(quiz);
         }
 
-        public TipBlock CreateTipBlock(Quiz quiz)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public TipBlock         CreateTipBlock(Quiz quiz)
         {
-            return TipBlockStrategy[quiz.QuizType]
-                    .Create(quiz);
+            return TipBlockStrategy.ContainsKey(quiz.QuizType)? TipBlockStrategy[quiz.QuizType]
+                .Create(quiz) : new DefaultTipBlockFactory().Create(quiz);
         }
 
-        public QuestionWidget CreateQuestionWidget(Question question)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public QuestionWidget   CreateQuestionWidget(Question question)
         {
-            return QuestionWidgetStrategy[question.Type]
-                    .Create(question);
+            return QuestionWidgetStrategy.ContainsKey(question.Type)? QuestionWidgetStrategy[question.Type]
+                .Create(question) : new DefaultQuestionWidgetFactory().Create(question);
         }
 
-        public AnswerWidget CreateAnswerWidget(Answer answer)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public AnswerWidget     CreateAnswerWidget(Answer answer)
         {
-            return AnswerWidgetStrategy[answer.Type]
-                    .Create(answer);
+            return AnswerWidgetStrategy.ContainsKey(answer.Type)? AnswerWidgetStrategy[answer.Type]
+                .Create(answer) : new DefaultAnswerWidgetFactory().Create(answer);
         }
 
-        public TipWidget CreateTipWidget(Tip tip)
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
+        public TipWidget        CreateTipWidget(Tip tip)
         {
-            return TipWidgetStrategy[tip.Type]
-                    .Create(tip);
+            return TipWidgetStrategy.ContainsKey(tip.Type) ? TipWidgetStrategy[tip.Type]
+                .Create(tip) : new DefaultTipWidgetFactory().Create(tip);
         }
 
     }

@@ -134,6 +134,9 @@ namespace DeveliaGameEngine
         {
             layer.OnLoad();
             Game.Components.Add(layer);
+            layer.ForceLoad();
+                
+            
             /*
             foreach (Object2D tmp in layer.ObjectList)
             {
@@ -170,6 +173,9 @@ namespace DeveliaGameEngine
         {
             layer.OnUnload();
             Game.Components.Remove(layer);
+            layer.ForceUnload();
+
+            
             /*
             foreach (Object2D tmp in layer.ObjectList)
             {

@@ -110,6 +110,13 @@
     <Compile Include="Develia.cs" />
     <Compile Include="GUI\Components\AnswerBlock.cs" />
     <Compile Include="GUI\Components\AnswerWidget.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultAnswerBlock.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultAsnwerWidget.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultQuestionWidget.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultQuestionBlock.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultQuizBlock.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultTipBlock.cs" />
+    <Compile Include="GUI\Components\Defaults\DefaultTipWidget.cs" />
     <Compile Include="GUI\Components\DeveliaTheme.cs" />
     <Compile Include="GUI\Components\QuestionBlock.cs" />
     <Compile Include="GUI\Components\QuestionWidget.cs" />
@@ -117,8 +124,10 @@
     <Compile Include="GUI\Components\SimpleAnswerBlock.cs" />
     <Compile Include="GUI\Components\TipBlock.cs" />
     <Compile Include="GUI\Components\TipWidget.cs" />
+    <Compile Include="GUI\Factories\DefaultFactories.cs" />
+    <Compile Include="GUI\Factories\QuizFactory.cs" />
     <Compile Include="GUI\Screens\QuizScreen.cs" />
-    <Compile Include="GUI\Util\IQuizFactory.cs" />
+    <Compile Include="GUI\Factories\FactoryInterfaces.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

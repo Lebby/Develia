@@ -23,7 +23,6 @@ namespace Develia.GUI.Components
                 if (_answerBlock != default(AnswerBlock)) removeComponent(_answerBlock);
                 _answerBlock = value;
                 addComponent(_answerBlock);
-
             }
         }
         
@@ -55,8 +54,7 @@ namespace Develia.GUI.Components
             {                
                 if (value == null) return;
                 _quiz = value;
-                QuestionBlock.Question = DataManager.Instance.GetQuestion(value.QuestionID);
-                int i=0;
+                QuestionBlock.Question = DataManager.Instance.GetQuestion(value.QuestionID);                
 
                 List<Answer> tmp = new List<Answer>();
                 foreach(long idAnswer in value.Answers)
@@ -64,6 +62,7 @@ namespace Develia.GUI.Components
                     tmp.Add(DataManager.Instance.GetAnswer(idAnswer));
                 }
                 AnswerBlock.AnswerList = tmp;
+                //TODO: TIP BLOCK
             }
         }
 
@@ -71,6 +70,15 @@ namespace Develia.GUI.Components
         {
             QuestionBlock = new QuestionBlock();
             AnswerBlock = new AnswerBlock();
+            TipBlock = new TipBlock();
+        }
+
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            addComponent(QuestionBlock);
+            addComponent(AnswerBlock);
+            addComponent(TipBlock);
         }
     }
 }

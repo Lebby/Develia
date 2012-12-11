@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Develia.GUI.Screens;
+using Develia.GUI.Factories;
 
 
 
@@ -54,18 +55,17 @@ namespace DGETest
             resscreen = new ResolutionScreen();
             quizScreen = new QuizScreen();
             base.Initialize();
-            TestQuestions tq = new TestQuestions();
-            tq.createQuiz();
-            quizScreen.QuizBlock.Quiz = tq.createQuiz();
-             string tmp = "Supponendo che: \n int a = 2; int b = 3; float c = 4; double d = 5; int risI; int e = 2; double risD; \n" +
+            TestQuestions tq = new TestQuestions();                     
+            string tmp = "Supponendo che: \n int a = 2; int b = 3; float c = 4; double d = 5; int risI; int e = 2; double risD; \n" +
                 "Qual è risultato dell’espressione seguente?\n" +
                 "risD = d + c * b + a / b;";
             string[] answ = {"15","18,5","18"};
             int[] tmp1 = {0};
-            quizScreen.QuizBlock.Quiz = tq.createSimpleQuiz(tmp, answ, tmp1);
+            /*quizScreen.QuizBlock.Quiz = tq.createSimpleQuiz(tmp, answ, tmp1);
             Console.WriteLine("init");
             quizScreen.addComponent(quizScreen.QuizBlock.QuestionBlock.QuestionWidget);
-            quizScreen.addComponent(quizScreen.QuizBlock.AnswerBlock.AnswerListWidget[0]);
+            quizScreen.addComponent(quizScreen.QuizBlock.AnswerBlock.AnswerListWidget[0]);*/
+            quizScreen.QuizBlock = QuizFactory.Instance.CreateQuizBlock(tq.createSimpleQuiz(tmp, answ, tmp1));
 
         }
 

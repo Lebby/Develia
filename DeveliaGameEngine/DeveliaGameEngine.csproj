@@ -93,12 +93,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera2D.cs" />
+    <Compile Include="DefaultLayout.cs" />
     <Compile Include="DrawMode.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="EffectShow.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="IDManager.cs" />
     <Compile Include="Layer.cs" />
+    <Compile Include="Layout.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="MouseCursor.cs" />
     <Compile Include="Object2D.cs" />

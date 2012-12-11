@@ -8,5 +8,7 @@ namespace Develia.GUI.Components
 {
     public class TipWidget : TextWidget
     {
+        public TipWidget() : base(DeveliaTheme.TipFont)
+        {}
     }
 }

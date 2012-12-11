@@ -22,7 +22,7 @@ namespace DeveliaGameEngine
         public StorageManager()
         {
             //_storageDevice = new StorageDevice();
-            IsolatedStorageFile turi;
+            //IsolatedStorageFile turi;
         }
 
         public static StorageContainer Open(string containerName, PlayerIndex player, AsyncCallback cb, object state)
