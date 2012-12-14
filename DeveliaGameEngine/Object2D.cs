@@ -9,45 +9,62 @@ namespace DeveliaGameEngine
 {
     public class Object2D : DrawableGameComponent
     {
-        private SpriteBatch _spriteBatch;
-        private SpriteEffects _effects;
-        private DrawMode _drawMode = null;
+        private SpriteBatch     _spriteBatch;
+        private SpriteEffects   _effects;
+        private DrawMode        _drawMode = null;
 
-        private Color _color;
+        private Color           _color;
         
-        private Texture2D _texture;
+        private Texture2D       _texture;
         
-        private Vector2 _position;
-        private Vector2 _origin;
-        private Vector2 _scale;
-        private Rectangle _bound;
-        private float _rotation;
+        private Vector2         _position;
+        private Vector2         _origin;
+        private Vector2         _scale;
+        private Rectangle       _bound;
+        private float           _rotation;
 
-        private float _layerDepth;
+        private float           _layerDepth;
 
-        public Vector2 Position { get { return _position; } set { _position = value; Bound = CalculateBound(); } }
-        public Vector2 Origin{ get{ return _origin;} set{ _origin= value;} }
-        public Vector2 Scale { get { return _scale; } set { _scale = value; Bound = CalculateBound(); } }
-        public Rectangle Bound{ get{ return _bound; } set{ _bound= value;} }
-        public float Rotation { get { return _rotation; } set { _rotation = value; Bound = CalculateBound(); } }
-        public float LayerDepth{ get{ return _layerDepth;}     set{_layerDepth = value;} }
-        public Color TintColor{ get{ return _color;} set{_color = value;} }
-        public SpriteEffects Effects { get { return _effects; } set { _effects = value; Bound = CalculateBound(); } }
+        public Vector2          Position { get  { return  _position;}
+                                           set  { _position = value;}}
+        
+        public Vector2          Origin   { get  { return   _origin;}       
+                                           set  { _origin   = value;}}
+        
+        public Vector2          Scale    { get  { return  _scale;}
+                                           set  { _scale    = value;}}
+        
+        public Rectangle        Bound    { get  { return _bound;} 
+                                           set  { _bound= value;}}
+        
+        public float            Rotation { get  { return _rotation;}
+                                           set  { _rotation = value;}}
+        
+        public float            LayerDepth{ get { return _layerDepth;}     
+                                            set { _layerDepth = value;}}
+        
+        public Color            TintColor{  get { return _color;} 
+                                            set {_color = value;}}
+        
+        public SpriteEffects    Effects  { get  { return _effects;} 
+                                           set  { _effects = value;}}
         
         
-        public DrawMode DrawMode { get { return _drawMode; } set { _drawMode=value; }}
+        public DrawMode         DrawMode { get { return _drawMode;} 
+                                           set { _drawMode=value;}}
 
-        public Texture2D BackgroundImage { get { return _texture; } set { _texture = value; Bound = CalculateBound(); } }
+        public Texture2D BackgroundImage { get { return _texture;} 
+                                           set { _texture = value;}}
 
         public Object2D()
             : base(Engine.Instance.Game) 
         {
-            _spriteBatch = Engine.Instance.SpriteBatch;
-            _position = Vector2.Zero;
-            _origin=Vector2.Zero;
-            _scale=Vector2.One;
-            _rotation = 0f;
-            _color = Color.White;
+            _spriteBatch    = Engine.Instance.SpriteBatch;
+            _position       = Vector2.Zero;
+            _origin         = Vector2.Zero;
+            _scale          = Vector2.One;
+            _rotation       = 0f;
+            _color          = Color.White;
         }
 
         public override void Initialize()
@@ -97,18 +114,33 @@ namespace DeveliaGameEngine
 
         public virtual void Draw()
         {            
-            SpriteBatch.Draw(_texture, _position, _bound, _color, _rotation, _origin, _scale, _effects, _layerDepth);
+            SpriteBatch.Draw(
+                _texture, 
+                _position, 
+                _bound, 
+                _color, 
+                _rotation, 
+                _origin, 
+                _scale, 
+                _effects, 
+                _layerDepth);
+            Util.DrawRectangle(_bound, Color.Violet, Color.Red, 1);
         }
 
         public virtual Rectangle CalculateBound()
         {
             if (_texture == null) return default(Rectangle);
-            return new Rectangle((int)Position.X, (int)Position.Y, _texture.Bounds.Width, _texture.Bounds.Height);
+            
+            return new Rectangle(
+                (int)Position.X, 
+                (int)Position.Y, 
+                _texture.Bounds.Width, 
+                _texture.Bounds.Height);
         }
 
-        public virtual void OnLoad() { }
-        public virtual void OnUnload() { }
-        public virtual void OnShow() { }
-        public virtual void OnHide() { }
+        public virtual void OnLoad  ()    { }
+        public virtual void OnUnload()    { }
+        public virtual void OnShow  ()    { }
+        public virtual void OnHide  ()    { }
     }
 }

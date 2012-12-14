@@ -13,55 +13,42 @@ namespace DeveliaGameEngine
     /// </summary>
     public class Engine : Microsoft.Xna.Framework.GameComponent
     {        
-        private static Engine instance;
-
-        Screen _currentScreen = null;
-       
-        private DrawMode _drawMode = new DrawMode();
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private ResolutionManager _resolutionManager;
-        private Library _library;
+        private static Engine           _instance;
+        private Screen                  _currentScreen = null;       
+        private DrawMode                _drawMode      = new DrawMode();        
+        private SpriteBatch             _spriteBatch;
+        private Library                 _library;
         
+        private GraphicsDeviceManager   _graphics;
+        private ResolutionManager       _resolutionManager;
 
-        public Library Library
-        {
-            get
-            {
-                return instance._library; ;
-            }
-        }
 
-        public DrawMode DefaultDrawMode { get { return _drawMode; } }
+        public static Engine Instance   { get { return _instance; }}        
+        public Library Library          { get { return _instance._library; ; }}
+        public DrawMode DefaultDrawMode { get { return _drawMode; }}
+        
+        public GraphicsDeviceManager    GraphicsDeviceManager
+                                        { get { return _instance._graphics; }}
+        
+        public ResolutionManager        ResolutionManager
+                                        { get { return _instance._resolutionManager; }}
+
+        public SpriteBatch              SpriteBatch
+                                        { get { if (_instance._spriteBatch == null) 
+                                                    _instance._spriteBatch = new SpriteBatch(_instance.Game.GraphicsDevice);
+                                                return _spriteBatch; }}
         
         private Engine(Game game)
-            : base(game)
+                : base(game)
         {
-            _graphics = new GraphicsDeviceManager(game);
-            _library = Library.Instance;
+            _graphics          = new GraphicsDeviceManager(game);
+            _library           = Library.Instance;
             _resolutionManager = new ResolutionManager();
             
             // Set Graphic Profile to minimum requirements
             _graphics.GraphicsProfile = GraphicsProfile.Reach;
             _graphics.ApplyChanges();
-        }
-
-        public GraphicsDeviceManager GraphicsDeviceManager
-        {
-            get
-            {
-                return instance._graphics;
-            }
-        }
-
-        public ResolutionManager ResolutionManager
-        {
-            get
-            {
-                return instance._resolutionManager;
-            }
-        }
-      
+        }      
 
 
         /// <summary>
@@ -87,29 +74,11 @@ namespace DeveliaGameEngine
             
         }
 
-        
-
-        
-        public static Engine Instance { get { return instance; } }
-
-
-        public SpriteBatch SpriteBatch { 
-            get 
-            {
-                if (instance._spriteBatch == null)
-                {
-                    instance._spriteBatch = new SpriteBatch(instance.Game.GraphicsDevice);
-                }
-                return _spriteBatch; 
-            } 
-        }
-        
-
         public static void init(Game game)
         {
-            if ((instance == null) && ( game != null ))
+            if ((_instance == null) && ( game != null ))
             {
-                instance = new Engine(game);                
+                _instance = new Engine(game);                
             }            
         }
         
@@ -131,7 +100,7 @@ namespace DeveliaGameEngine
 
         public void Load(Layer layer)
         {
-            layer.OnLoad();
+            layer.OnLoad();            
             Game.Components.Add(layer);
             layer.ForceLoad();
             layer.Arrange();
@@ -168,9 +137,8 @@ namespace DeveliaGameEngine
             layer.Enabled = false;
         }
 
-
-
-        public static Dictionary<String, Texture> LoadContent(ContentManager contentManager, string contentFolder)
+        public static Dictionary<String, Texture> 
+                      LoadContent(ContentManager contentManager, string contentFolder)
         {
             //Load directory info, abort if none
             DirectoryInfo dir = new DirectoryInfo(contentManager.RootDirectory + "\\" + contentFolder);

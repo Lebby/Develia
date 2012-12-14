@@ -35,7 +35,8 @@ namespace DeveliaGameEngine
         }        
 
         public override void  Draw()
-        {            
+        {
+            base.Draw();
             SpriteBatch.DrawString(
                 Font,Text,Position,TintColor,Rotation,Origin,Scale,Effects,LayerDepth);            
         }

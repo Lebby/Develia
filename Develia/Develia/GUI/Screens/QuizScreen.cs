@@ -14,7 +14,7 @@ namespace Develia.GUI.Screens
     public class QuizScreen : Screen
     {
         private QuizBlock _quizBlock;
-        public QuizBlock QuizBlock
+        public  QuizBlock QuizBlock
         {
             get { return _quizBlock; }
             set

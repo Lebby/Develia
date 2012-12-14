@@ -16,6 +16,8 @@ namespace DeveliaGameEngine
         public float MarginBottom   { get { return _marginBot; }    set { _marginBot    = value; } }
         public float MarginLeft     { get { return _marginLeft; }   set { _marginLeft   = value; } }
         public float MarginRight    { get { return _marginRight; }  set { _marginRight  = value; } }
+
+        
         
         public void Arrange(List<Object2D> list, Rectangle container)
         {
@@ -23,8 +25,9 @@ namespace DeveliaGameEngine
             Console.WriteLine("Layout! ");            
             foreach(Object2D tmp in list)
             {
+                Console.WriteLine("" + tmp);
                 Console.WriteLine("x : " + x + " y : " + y + " cont H : " + container.Height + " cont W : " + container.Width);
-                Console.WriteLine("Container H : " + container.Height + " tmp H : " + tmp.Bound.Height);
+                Console.WriteLine("Container W : " + container.Width + " tmp H : " + tmp.Bound.Height);
                 //if (y < container.Height - tmp.Bound.Height)
                 {
                     y += tmp.Bound.Height;
@@ -40,6 +43,8 @@ namespace DeveliaGameEngine
                 tmp.Position = new Vector2(x, y);
 
             }
+
+
         }
     }
 }
