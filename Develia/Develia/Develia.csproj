@@ -117,7 +117,7 @@
     <Compile Include="GUI\Components\Defaults\DefaultQuizBlock.cs" />
     <Compile Include="GUI\Components\Defaults\DefaultTipBlock.cs" />
     <Compile Include="GUI\Components\Defaults\DefaultTipWidget.cs" />
-    <Compile Include="GUI\Components\DeveliaTheme.cs" />
+    <Compile Include="GUI\Themes\DeveliaTheme.cs" />
     <Compile Include="GUI\Components\QuestionBlock.cs" />
     <Compile Include="GUI\Components\QuestionWidget.cs" />
     <Compile Include="GUI\Components\QuizBlock.cs" />
@@ -128,6 +128,15 @@
     <Compile Include="GUI\Factories\QuizFactory.cs" />
     <Compile Include="GUI\Screens\QuizScreen.cs" />
     <Compile Include="GUI\Factories\FactoryInterfaces.cs" />
+    <Compile Include="GUI\Themes\LD\LDAnswerBlock.cs" />
+    <Compile Include="GUI\Themes\LD\LDCommandPanel.cs" />
+    <Compile Include="GUI\Themes\LD\LDQuestionBlock.cs" />
+    <Compile Include="GUI\Themes\LD\LDQuestionInfoPanel.cs" />
+    <Compile Include="GUI\Themes\LD\LDQuizBlock.cs" />
+    <Compile Include="GUI\Themes\LD\LDQuizInfoPanelClass1.cs" />
+    <Compile Include="GUI\Themes\LD\LDQuizScreen.cs" />
+    <Compile Include="GUI\Themes\LD\LDTestPanel.cs" />
+    <Compile Include="GUI\Themes\LD\LDTheme.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Develia.GUI.Screens;
 using Develia.GUI.Factories;
+using Develia.GUI.Themes.LD;
 
 
 
@@ -25,6 +26,7 @@ namespace DGETest
         ResolutionScreen resscreen;
         ContentManager cm;
         QuizScreen quizScreen;
+        LDQuizScreen ldscreen;
 
         private KeyboardState _currentKeyboardState;
         private KeyboardState _previousKeyboardState;
@@ -39,6 +41,7 @@ namespace DGETest
             cm = new ContentManager(Services, "DeveliaContent");
             Engine.init(this);
             Engine.Instance.ResolutionManager.FullScreen = false;
+            Engine.Instance.ResolutionManager.ScreenSize = new Vector2(800,480);
         }
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace DGETest
             bgscreen = new BackgroundScreen();
             resscreen = new ResolutionScreen();
             quizScreen = new QuizScreen();
+            ldscreen = new LDQuizScreen();
             base.Initialize();
             TestQuestions tq = new TestQuestions();                     
             string tmp = "Supponendo che: \n int a = 2; int b = 3; float c = 4; double d = 5; int risI; int e = 2; double risD; \n" +
@@ -146,6 +150,10 @@ namespace DGETest
                         case Keys.G:
                             Engine.Instance.loadScreen(quizScreen);
                             text = "Pressed G";
+                            break;
+                        case Keys.H:
+                            Engine.Instance.loadScreen(ldscreen);
+                            text = "Pressed H";
                             break;
 
 

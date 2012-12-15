@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Develia.GUI.Components
 {
-    class DeveliaTheme
+    public class DeveliaTheme
     {
         public static SpriteFont QuestionFont = Engine.Instance.Game.Content.Load<SpriteFont>("ExampleFont");
         public static SpriteFont AnswerFont = Engine.Instance.Game.Content.Load<SpriteFont>("ExampleFont");

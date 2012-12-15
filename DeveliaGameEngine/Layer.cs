@@ -110,7 +110,7 @@ namespace DeveliaGameEngine
 
         public void Arrange()
         {
-            Bound = CalculateBound();
+            //Bound = CalculateBound();
             Console.WriteLine(this + " PRE Layout - W : " + Bound.Width + " - H : " +  Bound.Height );            
             if (_layout != null) _layout.Arrange(_components,Bound);
             //Console.WriteLine("Layout " + _layout + " : " + this);

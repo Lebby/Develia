@@ -7,13 +7,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DeveliaGameEngine
 {
-    class RectangleShape : Object2D
+    public class RectangleShape : Object2D
     {
         
         public Color BorderColor;
         public Color FillColor;
         public Rectangle Rectangle;
         public int Thickness = 5;
+
+        public RectangleShape(Rectangle rectangle)
+        {
+            this.Rectangle = rectangle;
+        }
+
 
         private void DrawFill(Rectangle rectangleToDraw, Color FillColor)
         {
@@ -49,8 +55,9 @@ namespace DeveliaGameEngine
         public override void Draw()
         {
             base.Draw();
+            DrawFill(Rectangle, FillColor);
             DrawBorder(Rectangle, Thickness, BorderColor);
-            DrawFill(Rectangle, BorderColor);
+            
         }
     }
 }
