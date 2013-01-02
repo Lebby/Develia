@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Develia.GUI.Screens;
 using Develia.GUI.Factories;
 using Develia.GUI.Themes.LD;
+using System.IO;
 
 
 
@@ -42,6 +43,12 @@ namespace DGETest
             Engine.init(this);
             Engine.Instance.ResolutionManager.FullScreen = false;
             Engine.Instance.ResolutionManager.ScreenSize = new Vector2(800,480);
+            string[] files = Directory.GetFiles(cm.RootDirectory+"");
+            foreach (String tmp in files)
+            {
+                Console.WriteLine(tmp);
+            }
+
         }
 
         /// <summary>

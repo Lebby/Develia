@@ -50,6 +50,8 @@ namespace Develia.GUI.Themes.LD
             tmp.FillColor = Color.Purple;
             tmp.BorderColor = Color.Green;
             addComponent(tmp);*/
+
+            this.QuizBlock = new LDQuizBlock();
         }
     }
 }

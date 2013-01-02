@@ -22,7 +22,7 @@ namespace DGETest
         {
             try
             {
-                Font1 = Game.Content.Load<SpriteFont>("ExampleFont");
+                Font1 = Game.Content.Load<SpriteFont>("Arial");
             }
             catch (Exception e)
             {

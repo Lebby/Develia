@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Develia.GUI.Themes.LD
 {
-    class LDQuizInfoPanelClass1
+    class LDQuizInfoPanel
     {
     }
 }

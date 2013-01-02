@@ -18,7 +18,7 @@ namespace DGETest
         public ResolutionScreen()
         {
             rm = new ResolutionManager();
-            SpriteFont font = Engine.Instance.Game.Content.Load<SpriteFont>("ExampleFont");
+            SpriteFont font = Engine.Instance.Game.Content.Load<SpriteFont>("Arial");
             List<Vector2> tmpList = rm.AvailableDisplayMode;
             list = new LinkedList<TextWidget>();
             int tmpHeight = 0 ;

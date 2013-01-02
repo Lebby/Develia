@@ -8,6 +8,6 @@ namespace Develia.GUI.Themes.LD
 {
     public class LDCommandPanel : Layer
     {
-
+        
     }
 }
