@@ -25,7 +25,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.8"
      inkscape:cx="450.33999"
-     inkscape:cy="214.22075"
+     inkscape:cy="164.22075"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -173,7 +173,8 @@
        x1="254"
        y1="703.54126"
        x2="254"
-       y2="1042.8761" />
+       y2="1042.8761"
+       gradientTransform="scale(0.75,1)" />
   </defs>
   <metadata
      id="metadata3021">
@@ -216,7 +217,7 @@
     <rect
        style="fill:url(#linearGradient3957);fill-opacity:1;stroke:none"
        id="rect3032"
-       width="800"
+       width="600"
        height="400"
        x="0"
        y="652.36218" />
