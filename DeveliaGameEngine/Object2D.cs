@@ -124,7 +124,7 @@ namespace DeveliaGameEngine
                 _scale, 
                 _effects, 
                 _layerDepth);
-            Util.DrawRectangle(_bound, Color.Violet, Color.Red, 1);
+            //Util.DrawRectangle(_bound, Color.Violet, Color.Red, 1); DEBUG
         }
 
         public virtual Rectangle CalculateBound()

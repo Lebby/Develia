@@ -11,7 +11,7 @@ namespace Develia.GUI.Themes.LD
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.BackgroundImage = Game.Content.Load<Texture2D>("X");
+            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\X");
             CalculateBound();
         }
     }

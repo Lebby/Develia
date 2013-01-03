@@ -13,7 +13,7 @@ namespace Develia.GUI.Themes.LD
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.BackgroundImage = Game.Content.Load<Texture2D>("i");
+            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\i");
             CalculateBound();
         }   
     }
