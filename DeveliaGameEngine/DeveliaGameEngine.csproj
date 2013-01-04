@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="Camera2D.cs" />
     <Compile Include="DefaultLayout.cs" />
     <Compile Include="DrawMode.cs" />

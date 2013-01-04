@@ -17,54 +17,62 @@ namespace DeveliaGameEngine
         
         private Texture2D       _texture;
         
-        private Vector2         _position;
+        
         private Vector2         _origin;
         private Vector2         _scale;
         private Rectangle       _bound;
+        private Rectangle?      _rectangleSource;
         private float           _rotation;
-
+        
         private float           _layerDepth;
 
-        public Vector2          Position { get  { return  _position;}
-                                           set  { _position = value;}}
+        public Vector2          Position { get  { return new Vector2(Bound.Left, Bound.Top); }
+                                           set  { _bound.Location = new Point((int)value.X, (int)value.Y); }}
         
-        public Vector2          Origin   { get  { return   _origin;}       
+        public Vector2          Origin   { get  { return    _origin;}       
                                            set  { _origin   = value;}}
         
-        public Vector2          Scale    { get  { return  _scale;}
+        public Vector2          Scale    { get  { return    _scale;}
                                            set  { _scale    = value;}}
         
-        public Rectangle        Bound    { get  { return _bound;} 
-                                           set  { _bound= value;}}
-        
-        public float            Rotation { get  { return _rotation;}
-                                           set  { _rotation = value;}}
-        
-        public float            LayerDepth{ get { return _layerDepth;}     
-                                            set { _layerDepth = value;}}
-        
-        public Color            TintColor{  get { return _color;} 
-                                            set {_color = value;}}
-        
-        public SpriteEffects    Effects  { get  { return _effects;} 
-                                           set  { _effects = value;}}
-        
-        
-        public DrawMode         DrawMode { get { return _drawMode;} 
-                                           set { _drawMode=value;}}
+        public Rectangle        Bound    { get  { return    _bound;} 
+                                           set  { _bound    = value;}}
 
-        public Texture2D BackgroundImage { get { return _texture;} 
-                                           set { _texture = value;}}
+        public Rectangle?       RectangleSource 
+                                         { get { return     _rectangleSource; }
+                                           set { _rectangleSource = value; }
+                                         }
+
+        
+        public float            Rotation { get { return    _rotation;}
+                                           set { _rotation = value;}}
+        
+        public float            LayerDepth
+                                         { get { return    _layerDepth;}     
+                                           set { _layerDepth = value;}}
+        
+        public Color            TintColor{ get { return    _color;} 
+                                           set { _color     = value;}}
+        
+        public SpriteEffects    Effects  { get { return    _effects;} 
+                                           set { _effects  = value;}}
+        
+        
+        public DrawMode         DrawMode { get { return     _drawMode;} 
+                                           set { _drawMode  = value;}}
+
+        public Texture2D BackgroundImage { get { return     _texture;} 
+                                           set { _texture   = value;}}
 
         public Object2D()
             : base(Engine.Instance.Game) 
         {
-            _spriteBatch    = Engine.Instance.SpriteBatch;
-            _position       = Vector2.Zero;
-            _origin         = Vector2.Zero;
-            _scale          = Vector2.One;
-            _rotation       = 0f;
-            _color          = Color.White;
+            _spriteBatch     = Engine.Instance.SpriteBatch;            
+            _origin          = Vector2.Zero;
+            _scale           = Vector2.One;
+            _rotation        = 0f;
+            _color           = Color.White;
+            _rectangleSource = null;            
         }
 
         public override void Initialize()
@@ -116,8 +124,8 @@ namespace DeveliaGameEngine
         {            
             SpriteBatch.Draw(
                 _texture, 
-                _position, 
-                _bound, 
+                Position,
+                _rectangleSource, 
                 _color, 
                 _rotation, 
                 _origin, 

@@ -14,7 +14,7 @@ namespace Develia.GUI.Themes.LD
         {
             base.LoadContent();
             this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\i");
-            CalculateBound();
+            Bound = BackgroundImage.Bounds;
         }   
     }
 }

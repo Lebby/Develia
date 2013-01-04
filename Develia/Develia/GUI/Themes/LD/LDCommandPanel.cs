@@ -9,7 +9,6 @@ namespace Develia.GUI.Themes.LD
 {
     public class LDCommandPanel : Layer
     {        
-        private String path;
         private XButton xButton;
         private VButton vButton;
         private TipsButton tipsButton;
@@ -25,9 +24,16 @@ namespace Develia.GUI.Themes.LD
             xButton = new XButton();
             vButton = new VButton();
             tipsButton = new TipsButton();
-            this.addComponent(xButton);
+            this.addComponent(xButton);            
             this.addComponent(vButton);
             this.addComponent(tipsButton);
+        }
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            xButton.Position = Position;
+            vButton.Position = Position;
+            tipsButton.Position = Position;
         }
         
     }

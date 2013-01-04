@@ -27,8 +27,7 @@ namespace DeveliaGameEngine
         private bool isLoad = false;
         
         
-        Color oldTint;
-        RectangleShape shape;
+        Color oldTint;        
 
         public Layer()
         { 
@@ -95,6 +94,7 @@ namespace DeveliaGameEngine
             {
                 if (tmp.Contains(x,y)) return true;
             }
+            if (Bound.Contains((int)x,(int)y)) return true;
             return false;
             
         }
@@ -151,13 +151,7 @@ namespace DeveliaGameEngine
             Console.WriteLine("ret final : X " + ret.Location.X + " Y : " + ret.Location.Y + " H : " + ret.Height + " W : " + ret.Width);
             
             return ret;
-        }
-
-        public override void Draw()
-        {
-            base.Draw();            
-            Util.DrawRectangle(Bound, Color.Yellow, Color.Red, 1);
-        }
+        }        
         
     }
 }
