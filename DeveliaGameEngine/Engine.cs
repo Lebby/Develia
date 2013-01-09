@@ -103,7 +103,7 @@ namespace DeveliaGameEngine
             layer.OnLoad();            
             Game.Components.Add(layer);
             layer.ForceLoad();
-            layer.Arrange();
+            layer.Arrange();            
             layer.Enabled = true;
         }        
 

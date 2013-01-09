@@ -102,6 +102,7 @@
     <Compile Include="IDManager.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Layout.cs" />
+    <Compile Include="Layouts\RelativePosition.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="MouseCursor.cs" />
     <Compile Include="Object2D.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="TextWidget.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

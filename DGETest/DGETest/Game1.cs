@@ -28,6 +28,7 @@ namespace DGETest
         ContentManager cm;
         QuizScreen quizScreen;
         LDQuizScreen ldscreen;
+        TestRelativeLayout testLayout;
 
         private KeyboardState _currentKeyboardState;
         private KeyboardState _previousKeyboardState;
@@ -65,6 +66,7 @@ namespace DGETest
             resscreen = new ResolutionScreen();
             quizScreen = new QuizScreen();
             ldscreen = new LDQuizScreen();
+            testLayout = new TestRelativeLayout();
             base.Initialize();
             TestQuestions tq = new TestQuestions();                     
             string tmp = "Supponendo che: \n int a = 2; int b = 3; float c = 4; double d = 5; int risI; int e = 2; double risD; \n" +
@@ -161,6 +163,10 @@ namespace DGETest
                         case Keys.H:
                             Engine.Instance.loadScreen(ldscreen);
                             text = "Pressed H";
+                            break;
+                        case Keys.J:
+                            Engine.Instance.loadScreen(testLayout);
+                            text = "Pressed J";
                             break;
 
 

@@ -43,8 +43,6 @@ namespace DeveliaGameEngine
                 tmp.Position = new Vector2(x, y);
 
             }
-
-
         }
     }
 }

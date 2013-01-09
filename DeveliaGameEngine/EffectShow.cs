@@ -11,13 +11,14 @@ namespace DeveliaGameEngine
         private EffectShow() : base()
         {}
 
-        public EffectShow(Object2D target)
+        public EffectShow(Object2D target) 
         {
+            Target = target;
             target.Visible = false;
         }
 
         public override void  run()
-        { 	        
+        {
             Target.Visible = true;
         }
 

@@ -114,6 +114,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="ResolutionScreen.cs" />
     <Compile Include="TestQuestions.cs" />
+    <Compile Include="TestRelativeLayout.cs" />
     <Compile Include="TestScreen.cs" />
   </ItemGroup>
   <ItemGroup>

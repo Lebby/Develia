@@ -66,6 +66,9 @@ namespace Develia.GUI.Components.Defaults
         public override void OnLoad()
         {
             base.OnLoad();
+            OnLoadEffect = new EffectShow(this);
+            //if (OnLoadEffect.Thread.IsAlive) OnLoadEffect.Thread.Abort();
+            Console.WriteLine(OnLoadEffect.Thread.ThreadState);
             OnLoadEffect.Thread.Start();
         }
 

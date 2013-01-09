@@ -23,7 +23,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.8"
+     inkscape:zoom="2"
      inkscape:cx="450.33999"
      inkscape:cy="164.22075"
      inkscape:document-units="px"
@@ -184,7 +184,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -594,7 +594,10 @@
          sodipodi:rx="48"
          sodipodi:ry="48"
          d="m 559,806.09448 c 0,26.50967 -21.49033,48 -48,48 -26.50967,0 -48,-21.49033 -48,-48 0,-26.50967 21.49033,-48 48,-48 26.50967,0 48,21.49033 48,48 z"
-         transform="matrix(0.4950495,0,0,0.4950495,319.5297,563.30551)" />
+         transform="matrix(0.4950495,0,0,0.4950495,319.5297,563.30551)"
+         inkscape:export-filename="C:\Users\Lebby\Documents\GitHub\Develia\Develia\DeveliaContent\Images\X.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
       <flowRoot
          xml:space="preserve"
          id="flowRoot3859"

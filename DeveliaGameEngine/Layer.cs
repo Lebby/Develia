@@ -38,8 +38,8 @@ namespace DeveliaGameEngine
         protected override void LoadContent()
         {
             if (isLoad) return;
-            isLoad = true;
-            base.LoadContent();
+            isLoad = true;            
+            base.LoadContent();            
             //Console.WriteLine("\nLayer " + this + " :LoadContent - Current Components : ");
             /*foreach (GameComponent tmp in Game.Components)
             {
@@ -49,8 +49,9 @@ namespace DeveliaGameEngine
             {                
                 try
                 {
-                    //Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
-                    Game.Components.Add(tmp);
+                    Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
+                    if (!Game.Components.Contains(tmp))
+                        Game.Components.Add(tmp);
                     if (tmp is Layer) {
                         ((Layer)(tmp)).ForceLoad(); 
                         ((Layer)(tmp)).Arrange(); 
@@ -66,9 +67,9 @@ namespace DeveliaGameEngine
 
         protected override void UnloadContent()
         {
-            if (!isLoad) return;
-            
+            if (!isLoad) return;            
             base.UnloadContent();
+            
             foreach (Object2D tmp in ObjectList)
             {
                 Game.Components.Remove(tmp);
@@ -108,12 +109,17 @@ namespace DeveliaGameEngine
             UnloadContent();
         }
 
-        public void Arrange()
+        public virtual void Arrange()
         {
             //Bound = CalculateBound();
             Console.WriteLine(this + " PRE Layout - W : " + Bound.Width + " - H : " +  Bound.Height );            
             if (_layout != null) _layout.Arrange(_components,Bound);
             //Console.WriteLine("Layout " + _layout + " : " + this);
+            foreach (Object2D tmp in ObjectList)
+            {
+                if (tmp is Layer) ((Layer)tmp).Arrange();
+                Console.WriteLine(tmp);
+            }    
         }
 
         public override Rectangle CalculateBound()

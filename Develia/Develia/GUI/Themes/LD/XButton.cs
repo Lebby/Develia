@@ -13,7 +13,8 @@ namespace Develia.GUI.Themes.LD
             base.LoadContent();
             this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\X");
             Bound = BackgroundImage.Bounds;
-            Position = new Microsoft.Xna.Framework.Vector2(100, 200);
+            Label.Text = "Annulla";
+            
         }
     }
 }

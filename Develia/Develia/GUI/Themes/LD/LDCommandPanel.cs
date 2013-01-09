@@ -15,25 +15,32 @@ namespace Develia.GUI.Themes.LD
 
         public LDCommandPanel()
         {
-            RectangleShape tmp;
+            /*RectangleShape tmp;
             tmp = new RectangleShape(LDTheme.CommandPanelBound);
-            //tmp.FillColor = Color.Peru;
+            tmp.FillColor = Color.Green;
             tmp.BorderColor = Color.Green;
-            addComponent(tmp);
-
+            addComponent(tmp);*/
+            Bound = LDTheme.CommandPanelBound;
             xButton = new XButton();
             vButton = new VButton();
             tipsButton = new TipsButton();
+            
             this.addComponent(xButton);            
             this.addComponent(vButton);
             this.addComponent(tipsButton);
         }
+        
         public override void OnLoad()
         {
-            base.OnLoad();
-            xButton.Position = Position;
-            vButton.Position = Position;
+            base.OnLoad();            
+        }
+
+        public override void Arrange()
+        {
+            base.Arrange();
             tipsButton.Position = Position;
+            vButton.Position    = new Vector2(Position.X, Position.Y         + tipsButton.Bound.Height);
+            xButton.Position    = new Vector2(Position.X, vButton.Position.Y + vButton.Bound.Height);            
         }
         
     }

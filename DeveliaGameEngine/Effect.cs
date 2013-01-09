@@ -23,7 +23,7 @@ namespace DeveliaGameEngine
 	                    {
                             run();
 	                    };
-                    Thread = new Thread(threadStarter);
+                    Thread = new Thread(threadStarter);            
         }
         
         public abstract void run();

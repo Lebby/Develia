@@ -26,7 +26,7 @@ namespace DeveliaGameEngine
         
         private float           _layerDepth;
 
-        public Vector2          Position { get  { return new Vector2(Bound.Left, Bound.Top); }
+        public Vector2          Position { get  { return new Vector2(Bound.Location.X, Bound.Location.Y); }
                                            set  { _bound.Location = new Point((int)value.X, (int)value.Y); }}
         
         public Vector2          Origin   { get  { return    _origin;}       
@@ -81,9 +81,16 @@ namespace DeveliaGameEngine
         }
 
         protected override void LoadContent()
-        {
+        {            
             base.LoadContent();
             _texture = new Texture2D(GraphicsDevice, 100, 100);
+            OnLoad();
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+            OnLoad();
         }
 
         public virtual bool Contains(float x, float y)
@@ -150,5 +157,9 @@ namespace DeveliaGameEngine
         public virtual void OnUnload()    { }
         public virtual void OnShow  ()    { }
         public virtual void OnHide  ()    { }
+
+
     }
+
+
 }
