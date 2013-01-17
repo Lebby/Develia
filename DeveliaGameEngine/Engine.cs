@@ -66,12 +66,7 @@ namespace DeveliaGameEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            /*if (instance._spriteBatch == null)
-            {                
-                instance._spriteBatch = new SpriteBatch(instance.Game.GraphicsDevice);                
-            }*/
-            
+            base.Update(gameTime);            
         }
 
         public static void init(Game game)
@@ -84,54 +79,45 @@ namespace DeveliaGameEngine
         
         public void loadScreen(Screen screen)
         {            
-            //System.Diagnostics.Debug.WriteLine("CurrentScreen On Load " + screen.ID); //stampa di prova
-            //System.Diagnostics.Debug.WriteLine("Components " + Game.Components.Count); //stampa di prova
             if (_currentScreen != null)
-            {
-                _currentScreen.OnUnload();                
+            {                
                 Unload(_currentScreen);
-                Hide(_currentScreen);
-                //System.Diagnostics.Debug.WriteLine("CurrentScreen On UnLoad " + _currentScreen.ID); //stampa di prova                
+                Hide(_currentScreen);                
             }            
             _currentScreen = screen;
-            Load(screen);
+            screen.LayerDepth = DefaultEngineSettings.Engine_Layer_Layer_Depth_Start;
+            Load(screen);            
             Show(screen);
         }
 
         public void Load(Layer layer)
-        {
-            layer.OnLoad();            
-            Game.Components.Add(layer);
-            layer.ForceLoad();
-            layer.Arrange();            
+        {                        
+            Game.Components.Add(layer);            
+            layer.Initialize();            
+            layer.ForceLoad();            
             layer.Enabled = true;
-        }        
+        }
 
         public void Show(Layer layer)
-        {
-            layer.OnShow();
+        {            
             layer.Visible = true;
             foreach (Object2D tmp in layer.ObjectList)
             {
-                tmp.Visible = true;
-                tmp.OnShow();
+                tmp.Visible = true;         
             }            
         }        
 
         public void Hide(Layer layer)
         {            
             foreach (Object2D tmp in layer.ObjectList)
-            {
-                tmp.OnHide();
+            {                
                 tmp.Visible = false;                
-            }
-            layer.OnHide();
+            }            
             layer.Visible = false;
         }
 
         public void Unload(Layer layer)
-        {
-            layer.OnUnload();
+        {            
             Game.Components.Remove(layer);
             layer.ForceUnload();
             layer.Enabled = false;

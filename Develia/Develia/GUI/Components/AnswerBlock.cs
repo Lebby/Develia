@@ -10,71 +10,55 @@ using DataManagement.Datatype.Test;
 
 namespace Develia.GUI.Components
 {
+    /// <summary>
+    ///  This class is UI Base Container of Answers.
+    /// </summary> 
     public class AnswerBlock : Layer
     {
         private List<Answer>        _answerList;
         private List<AnswerWidget>  _answerListWidget;
 
         /// <summary>
-        ///  This class performs an important function.
+        ///  AnswerListWidget contains a list of UI rappresentation of Answers
         /// </summary> 
         public List<AnswerWidget> AnswerListWidget 
         {
-            get
-            {
-                return _answerListWidget;
-            }
-            set
-            {
-                if (_answerListWidget.Count != 0)
-                {
-                    foreach (AnswerWidget tmp in _answerListWidget)
-                    {
-                        removeComponent(tmp);
-                    }
-                }
-                _answerListWidget = value;
-                foreach (AnswerWidget tmp in _answerListWidget)
-                {
-                    addComponent(tmp);
-                }
-            }
+            get { return _answerListWidget;  }
+            set { _answerListWidget = value; }
         }
 
         /// <summary>
-        ///  This class performs an important function.
+        /// List of Answers
         /// </summary>
         public List<Answer> AnswerList 
-        {
- 
-            get
-            {
-                return _answerList;
-            }
-            
-            set
-            {
-                _answerList = value;
-                List<AnswerWidget> tmp = new List<AnswerWidget>();
-                
-                foreach (Answer tmpAnswer in _answerList)
-                {
-                    AnswerWidget tmpa = new AnswerWidget();
-                    tmpa.Answer = tmpAnswer;
-                    tmp.Add(tmpa);
-                }
-                AnswerListWidget = tmp;
-            }
-
+        { 
+            get  {    return _answerList;  }
+            set  {    _answerList = value; }
         }
 
         /// <summary>
-        ///  This class performs an important function.
+        /// Default ctor
         /// </summary>
         public AnswerBlock(): base()
         {           
             _answerListWidget = new List<AnswerWidget>();
             _answerList = new List<Answer>();
-        }        
+        }
+
+        /// <summary>
+        /// On call it builds a widget for each answer and it add all widgets to render Engine.
+        /// </summary>
+        public override void OnLoad()
+        {
+            base.OnLoad();            
+            List<AnswerWidget> tmpList = new List<AnswerWidget>();
+            foreach (Answer tmpAnswer in _answerList)
+            {
+                AnswerWidget tmpa = new AnswerWidget();
+                tmpa.Answer = tmpAnswer;
+                tmpList.Add(tmpa);
+                addComponent(tmpa);
+            }                            
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace DeveliaGameEngine.Layouts
     {        
         public void  Arrange(List<Object2D> objectList, Microsoft.Xna.Framework.Rectangle container)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         
 

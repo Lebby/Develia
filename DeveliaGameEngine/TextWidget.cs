@@ -10,14 +10,14 @@ namespace DeveliaGameEngine
     public class TextWidget : Object2D
     {
         private String _text;
-        private SpriteFont _font;        
-        
+        private SpriteFont _font;
 
-        public SpriteFont Font { get { return _font; } set { _font = value; } }
+
+        public SpriteFont Font { get { return _font; } set { _font = value; IsToUpdate = true; } }
         public String Text{ get{return _text;}
             set { 
                 _text = value;
-                Bound = CalculateBound();
+                IsToUpdate = true;
             } 
         }
 
@@ -37,8 +37,8 @@ namespace DeveliaGameEngine
         public override void  Draw()
         {
             base.Draw();
-            SpriteBatch.DrawString(
-                Font,Text,Position,TintColor,Rotation,Origin,Scale,Effects,LayerDepth);            
+            SpriteBatch.DrawString(Font,Text,Position,TintColor,
+                                   Rotation,Origin,Scale,Effects,LayerDepth);            
         }
 
         public override Rectangle CalculateBound()

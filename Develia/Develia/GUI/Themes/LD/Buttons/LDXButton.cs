@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Develia.GUI.Themes.LD
+namespace Develia.GUI.Themes.LD.Buttons
 {
-    public class VButton : LDCommandButton
+    public class LDXButton : LDCommandButton
     {
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\v");
-            Bound = BackgroundImage.Bounds;
+            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\X");            
+            Label.Text = "Annulla";            
         }
     }
 }

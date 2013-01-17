@@ -12,11 +12,15 @@ namespace Develia.GUI.Themes.LD
     {
         public LDAnswerBlock()
         {
-            RectangleShape tmp;
+        }
 
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            RectangleShape tmp;
             tmp = new RectangleShape(LDTheme.AnswerBlockBound);
             tmp.FillColor = Color.Blue;
-            tmp.BorderColor = Color.Green;
+            tmp.BorderColor = Color.Green;            
             addComponent(tmp);
         }
     }

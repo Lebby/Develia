@@ -10,6 +10,7 @@ using Develia.GUI.Screens;
 using Develia.GUI.Factories;
 using Develia.GUI.Themes.LD;
 using System.IO;
+using Develia.GUI.Themes.LD.Screens;
 
 
 
@@ -67,6 +68,7 @@ namespace DGETest
             quizScreen = new QuizScreen();
             ldscreen = new LDQuizScreen();
             testLayout = new TestRelativeLayout();
+            
             base.Initialize();
             TestQuestions tq = new TestQuestions();                     
             string tmp = "Supponendo che: \n int a = 2; int b = 3; float c = 4; double d = 5; int risI; int e = 2; double risD; \n" +

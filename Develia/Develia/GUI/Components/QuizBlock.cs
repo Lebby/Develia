@@ -5,6 +5,9 @@ using System.Text;
 using DeveliaGameEngine;
 using DataManagement.Managers;
 using DataManagement.Datatype.Test;
+using Microsoft.Xna.Framework.Graphics;
+using Develia.GUI.Themes.LD;
+using Microsoft.Xna.Framework;
 
 
 namespace Develia.GUI.Components
@@ -21,8 +24,8 @@ namespace Develia.GUI.Components
             set
             {
                 if (_answerBlock != default(AnswerBlock)) removeComponent(_answerBlock);
-                _answerBlock = value;
-                addComponent(_answerBlock);
+                _answerBlock = value;                
+                IsToUpdate = true;
             }
         }
         
@@ -31,8 +34,8 @@ namespace Develia.GUI.Components
             get { return _questionBlock; }
             set {
                 if (_questionBlock != default(QuestionBlock)) removeComponent(_questionBlock);
-                _questionBlock = value;
-                addComponent(_questionBlock);
+                _questionBlock = value;                
+                IsToUpdate = true;
             } 
         }
 
@@ -43,7 +46,7 @@ namespace Develia.GUI.Components
             {
                 if (_tipBlock != default(TipBlock)) removeComponent(_tipBlock);
                 _tipBlock = value;
-                addComponent(_tipBlock);
+                IsToUpdate = true;
             }
         }
         
@@ -51,7 +54,7 @@ namespace Develia.GUI.Components
         {
             get { return _quiz; }
             set
-            {                
+            {
                 if (value == null) return;
                 _quiz = value;
                 QuestionBlock.Question = DataManager.Instance.GetQuestion(value.QuestionID);                
@@ -71,7 +74,7 @@ namespace Develia.GUI.Components
             //this not change order
             QuestionBlock   = new QuestionBlock();
             AnswerBlock     = new AnswerBlock();
-            TipBlock        = new TipBlock();
+            TipBlock        = new TipBlock();            
         }
 
         public override void OnLoad()
@@ -80,9 +83,7 @@ namespace Develia.GUI.Components
             //this not change order
             addComponent(TipBlock);
             addComponent(AnswerBlock);
-            addComponent(QuestionBlock);
-            
-            
+            addComponent(QuestionBlock);            
         }
     }
 }

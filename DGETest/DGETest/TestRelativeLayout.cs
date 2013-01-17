@@ -6,6 +6,7 @@ using DeveliaGameEngine;
 using Microsoft.Xna.Framework;
 using Develia.GUI.Themes.LD;
 using DeveliaGameEngine.Layouts;
+using Develia.GUI.Themes.LD.Buttons;
 
 namespace DGETest
 {
@@ -25,7 +26,7 @@ namespace DGETest
             addComponent(tmp);
         }
 
-        class XXButton : XButton
+        class XXButton : LDXButton
         {
             RelativePosition tmp = RelativePosition.TOP_LEFT;
             RelativePositionLayout layout = new RelativePositionLayout();

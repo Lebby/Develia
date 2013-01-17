@@ -22,19 +22,8 @@ namespace Develia.GUI.Components
                 return _tipListWidget;
             }
             set
-            {
-                if (_tipListWidget.Count != 0)
-                {
-                    foreach (TipWidget tmp in _tipListWidget)
-                    {
-                        removeComponent(tmp);
-                    }
-                }
-                _tipListWidget = value;
-                foreach (TipWidget tmp in _tipListWidget)
-                {
-                    addComponent(tmp);
-                }
+            {                
+                _tipListWidget = value;                
             }
         }
 
@@ -51,16 +40,7 @@ namespace Develia.GUI.Components
             
             set
             {
-                _tipList = value;
-                List<TipWidget> tmp = new List<TipWidget>();
-                
-                foreach (Tip tmpTip in _tipList)
-                {
-                    TipWidget tmpa = new TipWidget();
-                    tmpa.Tip = tmpTip;
-                    tmp.Add(tmpa);
-                }
-                TipListWidget = tmp;
+                _tipList = value;                
             }
 
         }
@@ -72,6 +52,20 @@ namespace Develia.GUI.Components
         {           
             _tipListWidget = new List<TipWidget>();
             _tipList = new List<Tip>();
+        }
+
+        public override void OnLoad()
+        {
+            base.OnLoad();
+            List<TipWidget> tmpL = new List<TipWidget>();
+            foreach (Tip tmpTip in _tipList)
+            {
+                TipWidget tmpa = new TipWidget();
+                tmpa.Tip = tmpTip;
+                tmpL.Add(tmpa);
+                addComponent(tmpa);
+            }
+            TipListWidget = tmpL;
         }
     }
 }

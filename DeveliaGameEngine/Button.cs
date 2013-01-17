@@ -12,9 +12,11 @@ namespace DeveliaGameEngine
     {
         private TextWidget  _text;
         private Object2D    _image;
-        private bool        _onOver = false;
+        private bool        _onOver     = false;
+        private bool        _isClicked  = false;
 
-        public  TextWidget  Label { get { return _text; } set { _text = value; } }
+        public  TextWidget  Label { get { return _text;  }  set { _text  = value; } }
+        public  Object2D    Image { get { return _image; }  set { _image = value; } }
 
         public Button()
         {
@@ -45,8 +47,11 @@ namespace DeveliaGameEngine
                 _onOver = true;
                 if ((buttonState == ButtonState.Pressed))
                 {
+                    if (_isClicked) return;
+                    _isClicked = false;
                     OnClick(mouseState);
-                }                
+                }else
+                    _isClicked = false;            
             }
             else
             {
@@ -60,8 +65,7 @@ namespace DeveliaGameEngine
 
         public override void Arrange()
         {            
-            base.Arrange();
-            //it could be Layout.something() ... skipped for speed. I could implement a Layout "Align center of container" class.
+            base.Arrange();            
             float x = (Bound.Width  - _text.Bound.Width)    / 2;
             float y = (Bound.Height - _text.Bound.Height)   / 2;
             _text.Position = new Vector2(Position.X + x, Position.Y + y);

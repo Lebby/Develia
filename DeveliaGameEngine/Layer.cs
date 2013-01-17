@@ -23,51 +23,47 @@ namespace DeveliaGameEngine
                                             } }
         public Layout Layout                { get { return _layout; }
                                               set { _layout = value;                                                   
-                                            } }
-        private bool isLoad = false;
+                                            } }        
+
         
         
-        Color oldTint;        
 
         public Layer()
         { 
             ObjectList = new List<Object2D>();
-            oldTint = TintColor;            
+            ObjectList.OrderBy(x=>x.LayerDepth);
+            LayerDepth = DefaultEngineSettings.Engine_Layer_Layer_Depth_Start;
         }        
 
         protected override void LoadContent()
         {
-            if (isLoad) return;
-            isLoad = true;            
-            base.LoadContent();            
-            //Console.WriteLine("\nLayer " + this + " :LoadContent - Current Components : ");
-            /*foreach (GameComponent tmp in Game.Components)
+            Console.WriteLine("LoadContent : " + this + " isLoad" + isLoaded) ;
+            base.LoadContent();
+            Object2D tmpex = null;
+            try
             {
-                Console.Write(tmp + " ");
-            }*/
-            foreach (Object2D tmp in ObjectList)
-            {                
-                try
+                foreach (Object2D tmp in ObjectList)
                 {
-                    Console.WriteLine ("\n" + this + " : Adding Component : " + tmp);
+                    tmpex = tmp;
                     if (!Game.Components.Contains(tmp))
+                    {
                         Game.Components.Add(tmp);
-                    if (tmp is Layer) {
-                        ((Layer)(tmp)).ForceLoad(); 
-                        ((Layer)(tmp)).Arrange(); 
+                        tmp.Initialize();
+                        if (!tmp.isLoaded)
+                            tmp.ForceLoad();
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine( e +"\n" +this +" : Duplicate Component : " + tmp);
-                }
-            }
-            
+                }                
+            }             
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                Console.WriteLine( e +"\n" +this +" : Duplicate Component : " + tmpex);
+            }            
         }
 
         protected override void UnloadContent()
         {
-            if (!isLoad) return;            
+            if (!isLoaded) return;            
             base.UnloadContent();
             
             foreach (Object2D tmp in ObjectList)
@@ -75,13 +71,29 @@ namespace DeveliaGameEngine
                 Game.Components.Remove(tmp);
                 if (tmp is Layer) ((Layer)(tmp)).ForceUnload();
             }
-            //Console.WriteLine("Called unload xxxxxxxxxx : tmp :" + this );
-            isLoad = false;
         }
 
         public void addComponent(Object2D component)
-        {        
+        {            
             ObjectList.Add(component);
+            if (component.ManualDepth) return;
+            
+            if (component is Layer )
+                component.LayerDepth = LayerDepth + DefaultEngineSettings.Engine_Layer_Layer_Depth_Step;
+            else if (ObjectList.Count == 0)
+                component.LayerDepth = LayerDepth + DefaultEngineSettings.Engine_Layer_Object_Depth_Step;
+            else
+                component.LayerDepth = this.LayerDepth + ObjectList.Last().LayerDepth 
+                                     + DefaultEngineSettings.Engine_Layer_Object_Depth_Step;
+            Console.WriteLine("Layer Depth after add :" + component + " : depth : " + component.LayerDepth);
+        }       
+
+
+        //relativeLayerDepth = relative Depth
+        public void addComponent(Object2D component, float relativeLayerDepth)
+        {
+            component.LayerDepth = this.LayerDepth + LayerDepth;
+            addComponent(component);
         }
 
         public void removeComponent(Object2D component)
@@ -96,68 +108,73 @@ namespace DeveliaGameEngine
                 if (tmp.Contains(x,y)) return true;
             }
             if (Bound.Contains((int)x,(int)y)) return true;
-            return false;
-            
-        }
-
-        public void ForceLoad()
-        {            
-            LoadContent();
-        }
-        public void ForceUnload()
-        {            
-            UnloadContent();
+            return false;            
         }
 
         public virtual void Arrange()
         {
-            //Bound = CalculateBound();
-            Console.WriteLine(this + " PRE Layout - W : " + Bound.Width + " - H : " +  Bound.Height );            
-            if (_layout != null) _layout.Arrange(_components,Bound);
-            //Console.WriteLine("Layout " + _layout + " : " + this);
-            foreach (Object2D tmp in ObjectList)
+            if ((Layout != null) && (IsToUpdate))
             {
-                if (tmp is Layer) ((Layer)tmp).Arrange();
-                Console.WriteLine(tmp);
-            }    
+                ForceArrange();
+                foreach(Object2D tmp in ObjectList)
+                {
+                    if (tmp is Layer)
+                    {
+                        ((Layer)tmp).ForceArrange();
+                    }
+                }
+            }
+        }
+
+        public virtual void ForceArrange()
+        {
+            Bound = CalculateBound();
+            Layout.Arrange(this.ObjectList, Bound);
         }
 
         public override Rectangle CalculateBound()
         {
-            Console.WriteLine("Calculate Bound");
-            Rectangle currentBound =  base.CalculateBound();
-            Rectangle ret = new Rectangle();
-            ret.Location = new Point((int)Engine.Instance.ResolutionManager.ScreenSize.X, (int)Engine.Instance.ResolutionManager.ScreenSize.Y);
+            Rectangle ret = base.CalculateBound();
+            if (!AutoBound || !IsToUpdate) return Bound;
+
+            if (ret == default(Rectangle))
+                ret.Location = new Point((int)Engine.Instance.ResolutionManager.ScreenSize.X, 
+                                         (int)Engine.Instance.ResolutionManager.ScreenSize.Y);
             foreach(Object2D tmp in _components)
             {                
-                //Rectangle recTmp = tmp.CalculateBound();
-                Rectangle recTmp = Bound;
-                //Console.WriteLine("ret : Top " + ret.Top + " Left : " + ret.Left + " H : " + ret.Height+ " W : " + ret.Width);
-                //Console.WriteLine("tmp : " + tmp + " Top " + recTmp.Top + " Left : " + recTmp.Left + " H : " + recTmp.Height + " W : " + recTmp.Width+ "\n");
+                Rectangle recTmp = Bound;               
                 
                 if (ret.Height <= recTmp.Height)
                 {
-                    ret.Height = recTmp.Top + recTmp.Height;
+                    ret.Height = recTmp.Height;
                 }
                 if (ret.Width <= recTmp.Width)
                 {
-                    ret.Width = recTmp.Left + recTmp.Width;
+                    ret.Width =  recTmp.Width;
                 }
                 if (ret.Top >= recTmp.Top)
                 {
-                    ret.Location = new Point( ret.Left      , recTmp.Top);
+                    ret.Location = new Point( ret.Left    , recTmp.Top);
                 }
                 if (ret.Left >= recTmp.Left)
                 {
-                    ret.Location = new Point( recTmp.Left   , ret.Top);
+                    ret.Location = new Point( recTmp.Left , ret.Top);
                 }
-            }
-            Bound = ret;
+            }            
             Position = new Vector2(ret.Location.X, ret.Location.Y);
-            Console.WriteLine("ret final : X " + ret.Location.X + " Y : " + ret.Location.Y + " H : " + ret.Height + " W : " + ret.Width);
-            
+            //Console.Write("Calculate Bound : " + this + " istoU: " + this.IsToUpdate + " Ab: " + AutoBound);
+            //Console.WriteLine(" rect final : X " + ret.X + " Y : " + ret.Y + " H : " + ret.Height + " W : " + ret.Width);            
             return ret;
-        }        
-        
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (IsToUpdate)
+            {
+                base.Update(gameTime);
+                Arrange();
+                IsToUpdate = false;
+            }            
+        }
     }
 }

@@ -110,6 +110,7 @@
     <Compile Include="RectangleShape.cs" />
     <Compile Include="ResolutionManager.cs" />
     <Compile Include="Screen.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="StorageManager.cs" />
     <Compile Include="StringSerializer.cs" />
     <Compile Include="TextWidget.cs" />

@@ -6,15 +6,15 @@ using DeveliaGameEngine;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 
-namespace Develia.GUI.Themes.LD
+namespace Develia.GUI.Themes.LD.Buttons
 {
-    public class TipsButton : LDCommandButton
+    public class LDTipsButton : LDCommandButton
     {
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\i");
-            Bound = BackgroundImage.Bounds;
+            this.BackgroundImage = Game.Content.Load<Texture2D>("Buttons\\i");            
+            Label.Text = "Tips";
         }   
     }
 }
